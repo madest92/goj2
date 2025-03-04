@@ -7,7 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/noirbizarre/gonja"
+	"github.com/nikolalohinski/gonja/v2"
+	"github.com/nikolalohinski/gonja/v2/exec"
 	"gopkg.in/yaml.v3"
 )
 
@@ -33,7 +34,7 @@ func Template(from, to string, varsFiles []string) {
 	if err != nil {
 		log.Fatalf("Error parsing template: %v", err)
 	}
-	rendered, err := tpl.Execute(mergedVars)
+	rendered, err := tpl.ExecuteToString(exec.NewContext(mergedVars))
 	if err != nil {
 		log.Fatalf("Error rendering template: %v", err)
 	}

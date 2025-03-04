@@ -1,6 +1,6 @@
 # goj2
 
-CLI tool for Jinja2 template rendering based on [gonja](https://github.com/noirbizarre/gonja).
+CLI tool for Jinja2 template rendering based on [gonja](https://github.com/NikolaLohinski/gonja).
 
 ## Installation
 

@@ -13,7 +13,7 @@ func TestTemplate(t *testing.T) {
 	fromFile := "testdata/template.yml.j2"
 	toFile := "testdata/template.yml"
 	varsFile := []string{"testdata/var1-template.yml", "testdata/var2-template.yml"}
-	res := "top:\n  a: a\n  b:\n    a: a\n    b: b2"
+	res := "top:\n  a: a\n  b:\n    a: a\n    b: b2\n"
 	defer os.Remove(toFile)
 
 	// Check if the output file was created with correct content
