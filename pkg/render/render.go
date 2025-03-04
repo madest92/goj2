@@ -22,7 +22,14 @@ func Template(from, to string, varsFiles []string) {
 		if err != nil {
 			log.Fatalf("Error reading variables file %q: %v", file, err)
 		}
-		err = yaml.Unmarshal(varsData, &vars)
+		// Escape ENV variables
+		varsDataEnv := os.Expand(string(varsData), func(str string) string {
+			if str == "$" {
+				return "$"
+			}
+			return os.Getenv(str)
+		})
+		err = yaml.Unmarshal([]byte(varsDataEnv), &vars)
 		if err != nil {
 			log.Fatalf("Error parsing variables file %q: %v", file, err)
 		}
