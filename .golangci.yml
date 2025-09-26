@@ -1,45 +1,45 @@
-# https://golangci-lint.run/usage/configuration/
-run:
-  timeout: 3m
-  issues-exit-code: 1
-  tests: true
-
+version: "2"
 output:
   formats:
-    - format: colored-line-number
-  print-issued-lines: true
-  print-linter-name: true
-
-linters-settings:
-  govet:
-    enable:
-      - shadow
-  dupl:
-    threshold: 100
-  goconst:
-    min-len:         2
-    min-occurrences: 2
-
+    text:
+      path: stdout
+      print-linter-name: true
+      print-issued-lines: true
 linters:
-  #disable-all: true
   enable:
-    - errcheck
     - goconst
-    - goimports
     - gosec
-    - gosimple
-    - govet
-    - ineffassign
     - revive
-    - staticcheck
-    - typecheck
-    - unused
-
-issues:
-  exclude-use-default: false
-  exclude:
-    - G104
-    - Error return value of .((os\.)?std(out|err)\..*|.*Close|.*Flush|os\.Remove(All)?|.*print(f|ln)?|os\.(Un)?Setenv). is not checked
-  exclude-dirs:
-    - bin
-    - examples
+  settings:
+    dupl:
+      threshold: 100
+    goconst:
+      min-len: 2
+      min-occurrences: 2
+    govet:
+      enable:
+        - shadow
+  exclusions:
+    generated: lax
+    rules:
+      - path: (.+)\.go$
+        text: G104
+      - path: (.+)\.go$
+        text: Error return value of .((os\.)?std(out|err)\..*|.*Close|.*Flush|os\.Remove(All)?|.*print(f|ln)?|os\.(Un)?Setenv). is not checked
+    paths:
+      - bin
+      - examples
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - bin
+      - examples
+      - third_party$
+      - builtin$
+      - examples$
